@@ -1,0 +1,559 @@
+.infinite-blue { background-color: #070446; } /* Background principal*/
+.cosmic-purple { background-color: #44008b; } /* Background titre*/
+.white { color: rgba(255, 255, 255, 0.75)} /* Texte h1*/
+
+a {color: inherit; text-decoration: none; }
+
+/*Font et détail titre*/
+h1 { 
+    font-family: "WindSong", cursive;
+    font-size: 4rem;
+    font-weight: 500;
+    font-style: normal;
+    text-align:center;
+}
+
+.birthstone-regular {
+  font-family: "Birthstone", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Couleurs et photo astres */ 
+
+.mercure {
+    --taille: 26px;
+    --couleur: #708089;
+}
+
+.venus {
+    --taille: 34px;
+    --couleur: #FFC649;
+}
+
+.terre {
+    --taille: 36px;
+    --couleur: #6b93d6;
+}
+
+.lune {
+    --taille: 12px;
+    --couleur: #A7B0C0;
+}
+
+.mars {
+    --taille: 30px;
+    --couleur: #C1440E; 
+}
+
+.jupiter {
+    --taille: 64px;
+    --couleur: #d8cbb0;
+}
+
+.saturne {
+    --taille: 50px;
+    --couleur: #FAE5BF; 
+}
+
+.uranus {
+    --taille: 40px;
+    --couleur: #B2D6DB;
+}
+
+.neptune {
+    --taille: 38px;
+    --couleur: #7CB7BB; 
+}
+
+.pluton {
+    --taille: 16px;
+    --couleur: #C5A080; 
+}
+
+.soleil-couleur { --couleur: #ffb938; }
+.lune-couleur { --couleur: #A7B0C0; }
+
+/* Base */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin : 0;
+    font-family: "Birthstone", cursive;
+    color: #eef0ff;
+
+    /* Fond nuit + étoile */
+
+    background: 
+        radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 50%), /*étoile*/
+        radial-gradient(2px 2px at 42% 31%, #fff 50%, transparent 50%), /*étoile*/
+        radial-gradient(2px 3px at 68% 9%, #fff 50%, transparent 50%), /*étoile*/
+        radial-gradient(4px 5px at 85% 62%, #fff 50%, transparent 50%), /*étoile*/
+        radial-gradient(1px 2px at 33% 77%, #fff 50%, transparent 50%), /*étoile*/
+        radial-gradient(3px 3px at 52% 40%, #fff 50%, transparent 50%), /*étoile*/
+        radial-gradient(3px 3px at 72% 80%, #fff 50%, transparent 50%), /*étoile*/
+        radial-gradient(ellipse at 20% 30%, #1F1F45 70%); /*background*/
+        background-attachment: fixed;
+        min-height: 100vh; /* Prend tout l'écran */
+}
+
+
+/* SYSTEME TELEPHONE (vertical) */
+
+.systeme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;   /* Coupe les orbites qui dépasse = pas de scroll horizontal */
+}
+
+/* SOLEIL */
+
+.soleil {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    width: 170px;
+    aspect-ratio: 1;
+    margin: 2rem 0 1rem;
+    border-radius: 50%;
+    display: flex;
+    background: radial-gradient(circle at 40% 35%, #fff0b3, #ffc34d 45%, #f08a24 100%);
+    box-shadow: 0 0 40px 8px rgba(255, 170, 50, .45);
+}
+
+/* ORBITES */
+
+.orbites {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.orbite {
+    position: relative;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-margin-top: 40vh; /* page d'acceuil --> planète toujours vers le centre même après avoir été cliqué */
+
+    /* décalage des planètes */
+    --dx: -60px;
+    --dy: 0px;
+}
+
+.orbite:nth-child(even) {
+    --dx: -15px;
+}
+
+    /* Arc d'orbites */
+
+    .orbite::before {
+        content: "";
+        position: absolute;
+        left: -30%;
+        right: -30%;
+        bottom: 50%;
+        height: 600px;
+        border-bottom: 1.5px solid rgba(240, 240, 255, .30);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .orbite-lointaine::before {
+        border-bottom-style: dashed;
+    }
+
+/* LES PLANETES */
+
+.planete,
+.lune {
+    position: relative;
+    z-index: 1;
+    width: var(--taille);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--couleur) center / cover no-repeat;
+    transform: translate(var(--dx), var(--dy));
+    transition: box-shadow .2s;
+}
+
+.planete {
+    height: var(--taille);
+    flex-shrink: 0;
+}
+
+.planete:hover,
+.lune:hover {
+    box-shadow: 0 0 0 4px rgba(238, 240, 255, .25);
+}
+
+    /* anneau de saturne */
+
+    .saturne::after {
+        content: "";
+        position: absolute;
+        inset: 38% -40%;
+        border: 3px solid #e8d6a6;
+        border-radius: 50%;
+        transform: rotate(-15deg);
+        pointer-events: none;
+    }
+
+.lune {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -34px 0 0 -40px
+}
+
+.etiquette {
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    white-space: nowrap;    /* Texte sur 1 seule ligne */
+    font-size: 1rem;
+}
+
+.fiche {
+    position: fixed;
+    inset: 0;   /*plein écran*/
+
+    z-index: 10;
+    overflow-y: auto;   /* scroll auto si texte trop long*/
+
+    overflow-x: hidden;
+    padding-bottom: 2rem; 
+    background-color: #070446;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .4s, visibility 0s .4s;
+    /*fermeture : fondu puis cache (visi. attend 0.4s)*/
+}
+
+.fiche:target { /*affiche la fiche*/
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+/* Quand fiche ouverte bloque le scroll de la page derrière */
+body:has(.fiche:target) {
+    overflow: hidden;
+}
+
+/* Planète en haut */
+
+.grande-planete {
+    --largeur: min(120vw, 720px);
+    display: block;
+    position: relative;
+    z-index: 2;
+    left: 50%;
+    width: var(--largeur);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-top: calc(var(--largeur) * -0.66);
+    transform: translateX(-50%);
+    background: 
+        radial-gradient(circle at 50% 20%, transparent 55%, rgba(0, 0, 0, .35)),
+        var(--couleur) center / cover no-repeat;
+    box-shadow: 0 0 60px -10px var(--couleur);
+    cursor: pointer;
+}
+
+/* planète qui grandit */
+
+.fiche:target .grande-planete {
+    animation: planete-monte .8s cubic-bezier(.3, .8, .3, 1) both;
+}
+
+@keyframes planete-monte {
+    from { transform: translate(-50%, 55vh) scale(.08); }
+    to { transform: translate(-50%, 0) scale(1); }
+}
+
+/* effet planète back */
+
+.grande-planete:active {
+    filter : brightness(1.15);
+}
+
+/* anneau saturne */
+
+.grande-planete.saturne::after {
+    border-width: 12px;
+}
+
+/* Volet sous la planète */
+
+.volet {
+    position: relative;
+    z-index: 1;
+    width: calc(100% - 2rem);
+    max-width: 640px;
+    margin: -3rem auto 0;
+    padding: 4rem 1.25rem 1.5rem;
+    border-radius: 0 0 24px 24px;
+    background-color: rgba(68, 0, 139, .55);
+    border: 1px solid rgba(238, 240, 255, .15);
+    border-top: none;
+    font-size: 1.5rem;
+    line-height: 1.3;   /* écart entre les lignes */
+}
+
+/* ouverture haut en base */
+
+.fiche:target .volet {
+    animation: deroule .7s .5s ease-out both;
+}
+
+@keyframes deroule {
+    from { clip-path: inset(0 0 100% 0); }  /* 'enroulé' */
+    to { clip-path: inset(0 0 0 0); }   /* visible */
+}
+
+.volet h2 {
+    font-family: "WindSong", cursive;
+    font-size: 2.2rem;
+    font-weight: 500;
+    text-align:center;
+    margin: 0 0 1rem;
+}
+
+.astuce {
+    margin: 0 0 .5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    opacity: .6;
+}
+
+/* boutons précédent/suivant */
+
+.fiche-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(238, 240, 255, .15);
+}
+
+.fiche-nav a {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:.4rem;
+    max-width: 45%;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: transform .2s;
+}
+
+.fiche-nav a:hover,
+.fiche-nav a:active {
+    transform: scale(1.1);
+}
+
+/* flèche */
+
+.nav-prec::before { content: "←"; }
+.nav-suiv::before { content: "→"; }
+
+/* place fixe 'suivant' : à droite quand il est tout seul (Mercure) */
+
+.nav-suiv:only-child { margin-left: auto; }
+
+/* flèche mini lune et mini terre */
+
+.nav-centre::before { content: "↓"; }
+
+/* le lien du milieu reste centré (Terre et Lune) */
+.nav-centre { margin-inline: auto; }
+
+/* mini planète */
+
+.mini {
+    position: relative;
+    width: 44px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--couleur) center / cover no-repeat;
+    box-shadow: 0 0 12px -2px var(--couleur);
+}
+
+/* Niveau compétences */
+
+.niveau-20 { --niveau: 20%; }
+.niveau-45 { --niveau: 45%; }
+.niveau-50 { --niveau: 50%; }
+.niveau-60 { --niveau: 60%; }
+.niveau-80 { --niveau: 80%; }
+
+/* Barre compétence */
+
+.barre {
+    position: relative;
+    display: block;
+    height: 10px;
+    border-radius: 999px;
+    background-color: rgba(240, 240, 255, .85);
+}
+
+.barre::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--niveau);
+    border-radius: inherit;
+    background: linear-gradient(90deg, #44008b, #9b5cff);
+    box-shadow: 0 0 10px #9b5cff;
+}
+
+.barre::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: var(--niveau);
+    width: 18px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 35% 35%, #fff, #c9a0ff 60%, #7a2cff);
+    box-shadow: 0 0 12px 2px #b57bff;
+}
+
+/* animation remplissaeg */
+
+.fiche:target .barre::before {
+    animation: remplir 1s 1.2s ease-out both;
+}
+
+.fiche:target .barre::after {
+    animation: glisser 1s 1.2s ease-out both;
+}
+
+@keyframes remplir {
+    from { width: 0; }
+}
+
+@keyframes glisser {
+    from { left: 0; }
+}
+
+/* Placement */
+
+.competence-nom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .4rem;
+}
+
+/* Placement parcours */
+
+.item {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+}
+
+    /* colonne de gauche */
+    
+    .item-gauche p {
+        line-height: 1;
+    }
+
+    /* colonne de droite */
+
+    .item-droite {
+        position: relative;
+        border-left: 2px solid #eef0ff;
+        padding: 0 0 1.8rem 1.8rem;
+    }
+
+/* Centre d'intérêt */
+
+.cartes {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.carte {
+    flex: 1 1 200px;
+
+    padding: 1.5rem;
+    border: 1px solid rgba(238, 240, 255, .15);
+    border-radius: 16px;
+    background-color: rgba(7, 4, 70, .6);
+    box-shadow: 0 0 0 0 transparent;
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+
+/* Formulaire */
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.formulaire input,
+.formulaire textarea {
+    width: 100%;
+    margin-bottom: .8rem;
+    padding: .6rem .8rem;
+    border: 1px solid rgba(238, 240, 255, .3);
+    border-radius: 10px;
+    background-color: rgba(7, 4, 70, .6);
+    color: #eef0ff;
+    font: 1rem sans-serif;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.formulaire input:focus,
+.formulaire textarea:focus {
+    outline: none;
+    border-color: #C5A080;
+    box-shadow: 0 0 0 3px rgba(197, 160, 128, .3);
+}
+
+.formulaire button {
+    align-self: center;
+    padding: .5rem 2rem;
+    border: none;
+    border-radius: 999px;
+    background-color: #C5A080;
+    color: #070446;
+    font: inherit;
+    cursor: pointer;
+    transition: transform .2s
+}
+
+.formulaire button:hover {
+    transform: scale(1.05);
+}
+
+.lien {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Tablette et ordi */
