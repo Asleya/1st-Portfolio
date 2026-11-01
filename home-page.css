@@ -436,7 +436,7 @@ body:has(.fiche:target) {
     box-shadow: 0 0 12px 2px #b57bff;
 }
 
-/* animation remplissaeg */
+/* animation remplissage */
 
 .fiche:target .barre::before {
     animation: remplir 1s 1.2s ease-out both;
