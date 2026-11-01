@@ -13,6 +13,10 @@ h1 {
     text-align:center;
 }
 
+p,ul, li {
+    font-family: "Ubuntu", cursive;
+}
+
 .birthstone-regular {
   font-family: "Birthstone", cursive;
   font-weight: 400;
@@ -488,21 +492,131 @@ body:has(.fiche:target) {
 .cartes {
     display: flex;
     flex-direction: row;
-    align-content: center;
-    justify-content: center;
     gap: 1.5rem;
+
+    /* Défilement horizontal */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /*les cartes se place bien */
+    overscroll-behavior-x: contain; /*n'entraien pas la page dessous */
+
+    /* Annule le padding */
+    margin-inline: -1.25rem;
+    padding: .5rem 1.25rem 1.25rem;
+
+    /* barre de défilement */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(250, 230, 190, .5) transparent;
 }
 
 .carte {
-    flex: 1 1 200px;
+    --barre: 4.2rem; /* Bande titre */
 
-    padding: 1.5rem;
+    flex: 0 0 min(230px, 70%);
+    scroll-snap-align: center;
+
+    /* Taille fixe */
+    flex: 0 0 min(230px, 70%);
+    scroll-snap-align: center;
+
+    position : relative;
+    aspect-ratio: 2 / 3;
     border: 1px solid rgba(238, 240, 255, .15);
     border-radius: 16px;
+    overflow: hidden;
     background-color: rgba(7, 4, 70, .6);
-    box-shadow: 0 0 0 0 transparent;
     transition: transform .3s, box-shadow .3s, border-color .3s;
 }
+
+.carte:hover {
+    transform: translateY(-6px);
+    border-color: rgba(250, 230, 190, .5);
+    box-shadow: 0 10px 24px -6px rgba(250, 230, 190, .35);
+}
+
+/* Pas de JS donc case pour "laisser ouvert" */
+.case {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    margin: 0;
+}
+
+/* carte cliquable et titre */
+.carte-label {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.carte-label h3 {
+    margin: 0 0 .2rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.carte-label .indice {
+    font-size: .50rem;
+    letter-spacing: .08em;
+    color: #FAE5BF;
+    opacity: .85;
+}
+
+.carte-label .fermer { display: none; }
+
+/* Panneau de texte */
+.carte-panneau {
+    padding: 1.1rem 1rem calc(var(--barre) + .8rem); /* Bandeau pour le titre */
+    position: absolute;
+    inset: 0; /* Couvre tout la carte */
+    z-index: 2;
+    padding: 1.1rem 1rem 3.6rem;    /* Laisse voir le titre */
+    background-color: rgba(68, 0, 139, .93);
+
+    /* Défilement vertical du texte */
+    overflow-y: auto;
+    overscroll-behavior-y: contain;  /* N'entraîne pas les cartes à côté */
+
+    transform: translateY(101%);
+    transition: transform .45s ease;
+
+
+    /* Barre de défilement v2 */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(250, 229, 191, .5) transparent;
+}
+
+.carte-panneau p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.25;
+}
+
+/* Panneau ouvert*/
+.case:checked ~ .carte-panneau { transform: translateY(0); }
+.case:checked ~ .carte-label {
+    top: auto;              /* Label couvre que le bas de la carte */
+    height: var(--barre);
+    padding: .7rem 1rem;                            /* Pour faire rentrer le titre */
+    background-color: rgba(68, 0, 139, .93);
+    border-top: 1px solid rgba(250, 229, 191, .35);
+}
+.case:checked ~ .carte-label .ouvrir { display: none; }
+.case:checked ~ .carte-label .fermer { display: inline; }
+
+.case:focus-visible ~ .carte-label {
+    outline: 3px solid #FAE5BF;
+    outline-offset: -3px;
+}
+
 
 /* Formulaire */
 
