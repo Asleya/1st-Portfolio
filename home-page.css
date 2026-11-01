@@ -509,7 +509,7 @@ body:has(.fiche:target) {
 }
 
 .carte {
-    --barre: 4.2rem; /* Bande titre */
+    --barre: 4.5rem; /* Bande titre */
 
     flex: 0 0 min(230px, 70%);
     scroll-snap-align: center;
@@ -574,7 +574,7 @@ body:has(.fiche:target) {
 
 /* Panneau de texte */
 .carte-panneau {
-    padding: 1.1rem 1rem calc(var(--barre) + .8rem); /* Bandeau pour le titre */
+    padding: 1.1rem 1rem 0;
     position: absolute;
     inset: 0; /* Couvre tout la carte */
     z-index: 2;
@@ -594,6 +594,14 @@ body:has(.fiche:target) {
     scrollbar-color: rgba(250, 229, 191, .5) transparent;
 }
 
+/* Cale invisible : évite la dernière ligne cachée */
+
+.carte-panneau::after {
+    content: "";
+    display: block;
+    height: 1.5rem;
+}
+
 .carte-panneau p {
     margin: 0;
     font-size: 1.1rem;
@@ -607,7 +615,6 @@ body:has(.fiche:target) {
     height: var(--barre);
     padding: .7rem 1rem;                            /* Pour faire rentrer le titre */
     background-color: rgba(68, 0, 139, .93);
-    border-top: 1px solid rgba(250, 229, 191, .35);
 }
 .case:checked ~ .carte-label .ouvrir { display: none; }
 .case:checked ~ .carte-label .fermer { display: inline; }
