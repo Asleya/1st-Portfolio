@@ -59,5 +59,3 @@ Le site est publié sur **GitHub Pages** via **GitHub Actions**.
 3. publie ce dossier sur GitHub Pages.
 
 Le déploiement peut aussi être déclenché manuellement depuis l'onglet **Actions** du dépôt.
-
-> ⚙️ Prérequis côté dépôt : *Settings → Pages → Source → GitHub Actions*.
