@@ -14,9 +14,9 @@ La navigation se fait par un système solaire cliquable :
 | 🪐 Mercure | Présentation |
 | 🪐 Vénus | Skills |
 | 🪐 Terre & Lune | Parcours |
-| 🪐 Mars | Expérience professionnel |
+| 🪐 Mars | Expériences professionnelles |
 | 🪐 Jupiter | Projets |
-| 🪐 Saturne | Centres d'intérêt |
+| 🪐 Saturne | Centres d'intérêts |
 | 🪐 Uranus | CV |
 | 🪐 Neptune | Futur |
 | 🪐 Pluton | Contact |
