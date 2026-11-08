@@ -404,6 +404,7 @@ body:has(.fiche:target) {
 .niveau-50 { --niveau: 50%; }
 .niveau-60 { --niveau: 60%; }
 .niveau-80 { --niveau: 80%; }
+.niveau-100 { --niveau: 100%; }
 
 /* Barre compétence */
 
@@ -497,7 +498,7 @@ body:has(.fiche:target) {
     /* Défilement horizontal */
     overflow-x: auto;
     scroll-snap-type: x mandatory; /*les cartes se place bien */
-    overscroll-behavior-x: contain; /*n'entraien pas la page dessous */
+    overscroll-behavior-x: contain; /*n'entraine pas la page dessous */
 
     /* Annule le padding */
     margin-inline: -1.25rem;
